@@ -24,7 +24,9 @@
                 <div class="navbar-nav">
                     <ul class="nav navbar-nav navbar-center">
                         <?php
+                        /* Vai ser aqui o código para criar um usuario */
                         if (isset($_SESSION['cLogin']) && !empty($_SESSION['cLogin'])):
+                            $info;
                             if (isset($_GET['id']) && !empty($_GET['id'])):
                                 $u = new Usuarios();
                                 $info = $u->getUsuariobyID($_GET['id']);
@@ -42,15 +44,30 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (isset($_SESSION['cLogin']) && !empty($_SESSION['cLogin'])): ?>
-                        <li>
-                            <a href="./solicitacaoPermuta.php">Solicitar permuta</a>
-                        </li>
-                        <li>
-                            <a href="./solicitacoes.php">Solicitações</a>
-                        </li>
-                        <li>
-                            <a href="./sair.php">Sair</a>
-                        </li>
+                        <?php
+                        if (empty($info)) {
+                            $u = new Usuarios;
+                            $info = $u->getUsuariobyID($_SESSION['cLogin']);
+                        }
+                        ?>
+                        <?php if ($info['tipo_usuario'] == 0): ?>
+                            <li>
+                                <a href="./solicitacaoPermuta.php">Solicitar permuta</a>
+                            </li>
+                            <li>
+                                <a href="./solicitacoes.php">Solicitações</a>
+                            </li>
+                            <li>
+                                <a href="./sair.php">Sair</a>
+                            </li>
+                        <?php elseif ($info['tipo_usuario'] == (1 || 2)): ?>
+                            <li>
+                                <a href='./solicitacoes.php'>Analisar</a>
+                            </li>
+                            <li>
+                                <a href="./sair.php">Sair</a>
+                            </li>
+                        <?php endif; ?>
                     <?php else: ?>
                         <li>
                             <a href='./cadastro'>Cadastre-se</a>

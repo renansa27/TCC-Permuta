@@ -16,7 +16,7 @@ if (isset($_SESSION['cLogin'])) {
             <h2>
                 Você tem 
                 <?php
-                $numSol = $s->getAllNumSolicitacoes();
+                $numSol = $s->getNumSolicitacoesCom();
                 echo $numSol;
                 ?> 
                 permutas para analisar.
@@ -26,7 +26,7 @@ if (isset($_SESSION['cLogin'])) {
             ?>
             <h2>Você tem 
                 <?php
-                $numSol = $s->getAllNumSolicitacoes();
+                $numSol = $s->getNumSolicitacoesSarg();
                 echo $numSol;
                 ?> permutas para analisar.</h2>
             <?php

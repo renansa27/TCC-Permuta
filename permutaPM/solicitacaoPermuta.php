@@ -14,7 +14,7 @@
         $data = addslashes($_POST['data']);
         $turno = addslashes($_POST['turno']);
 
-        if (!empty($mat_usu_ped) && !empty($mat_usu_sub) && !empty($tipo_servico)&& !empty($data)&& !empty($turno)) {
+        if (!empty($mat_usu_ped) && !empty($mat_usu_sub) && !empty($tipo_servico) && !empty($data) && !empty($turno)) {
             if ($s->addSolicitacao($mat_usu_ped, $mat_usu_sub, $tipo_servico, $data, $turno)) {
                 ?>
                 <div class="alert alert-success">
@@ -116,4 +116,5 @@
     </form>
 </div>
 
-<?php require './pages/footer.php';
+<?php
+require './pages/footer.php';

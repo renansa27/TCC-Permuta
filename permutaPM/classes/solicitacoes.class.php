@@ -7,8 +7,50 @@ class Solicitacoes {
         global $pdo;
 
         $array = array();
-        $sql = $pdo->prepare("SELECT * FROM servico WHERE id_usu_ped =:id_usuario");
+        $sql = $pdo->prepare("SELECT * FROM servico WHERE id_usu_ped =:id_usuario OR id_usu_sub =:id_usuario");
         $sql->bindValue(':id_usuario', $_SESSION['cLoginMatricula']);
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            $array = $sql->fetchAll();
+        }
+        return $array;
+    }
+
+    public function getSolicitacoesAnalise() {
+        global $pdo;
+
+        $array = array();
+        $sql = $pdo->prepare("SELECT * FROM servico WHERE id_usu_sub =:id_usuario AND status = 0");
+        $sql->bindValue(':id_usuario', $_SESSION['cLoginMatricula']);
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            $array = $sql->fetchAll();
+        }
+        return $array;
+    }
+
+    public function getSolicitacoesAnaliseSarg() {
+        global $pdo;
+
+        $array = array();
+        $sql = $pdo->prepare("SELECT * FROM servico WHERE status = 1");
+        //$sql->bindValue(':id_usuario', $_SESSION['cLoginMatricula']);
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            $array = $sql->fetchAll();
+        }
+        return $array;
+    }
+
+    public function getSolicitacoesAnaliseCom() {
+        global $pdo;
+
+        $array = array();
+        $sql = $pdo->prepare("SELECT * FROM servico WHERE status = 2");
+        //$sql->bindValue(':id_usuario', $_SESSION['cLoginMatricula']);
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
@@ -51,16 +93,65 @@ class Solicitacoes {
         $sql->execute();
     }
 
-    public function excluirSolicitacao($id) {
+    public function aceitarSolSub($id) {
 
         global $pdo;
 
-        $sql = $pdo->prepare("DELETE FROM anuncios_imagens WHERE id_anuncio=:id_anuncio");
-        $sql->bindValue(":id_anuncio", $id);
+        $sql = $pdo->prepare("UPDATE servico SET status = 1 WHERE id=:id_solicitacao");
+        $sql->bindValue(":id_solicitacao", $id);
         $sql->execute();
+    }
 
-        $sql = $pdo->prepare("DELETE FROM servico WHERE id=:id");
-        $sql->bindValue(":id", $id);
+    public function aceitarSolSarg($id) {
+
+        global $pdo;
+
+        $sql = $pdo->prepare("UPDATE servico SET status = 6 WHERE id=:id_solicitacao");
+        $sql->bindValue(":id_solicitacao", $id);
+        $sql->execute();
+    }
+
+    public function enviarSolMaj($id) {
+        global $pdo;
+
+        $sql = $pdo->prepare("UPDATE servico SET status = 2 WHERE id=:id_solicitacao");
+        $sql->bindValue(":id_solicitacao", $id);
+        $sql->execute();
+    }
+
+    public function aceitarSolCom($id) {
+
+        global $pdo;
+
+        $sql = $pdo->prepare("UPDATE servico SET status = 6 WHERE id=:id_solicitacao");
+        $sql->bindValue(":id_solicitacao", $id);
+        $sql->execute();
+    }
+
+    public function recusaSolSub($id) {
+
+        global $pdo;
+
+        $sql = $pdo->prepare("UPDATE servico SET status = 3 WHERE id=:id_solicitacao");
+        $sql->bindValue(":id_solicitacao", $id);
+        $sql->execute();
+    }
+
+    public function recusaSolSarg($id) {
+
+        global $pdo;
+
+        $sql = $pdo->prepare("UPDATE servico SET status = 4 WHERE id=:id_solicitacao");
+        $sql->bindValue(":id_solicitacao", $id);
+        $sql->execute();
+    }
+
+    public function recusaSolCom($id) {
+
+        global $pdo;
+
+        $sql = $pdo->prepare("UPDATE servico SET status = 5 WHERE id=:id_solicitacao");
+        $sql->bindValue(":id_solicitacao", $id);
         $sql->execute();
     }
 
@@ -101,11 +192,33 @@ class Solicitacoes {
         }
         return $numSol;
     }
-    
+
+    public function getNumSolicitacoesSarg() {
+        global $pdo;
+        $sql = $pdo->prepare("SELECT * FROM servico WHERE status = 1");
+        $sql->execute();
+        $numSol = $sql->rowCount();
+        if ($numSol == NULL) {
+            $numSol = 0;
+        }
+        return $numSol;
+    }
+
+    public function getNumSolicitacoesCom() {
+        global $pdo;
+        $sql = $pdo->prepare("SELECT * FROM servico WHERE status = 2");
+        $sql->execute();
+        $numSol = $sql->rowCount();
+        if ($numSol == NULL) {
+            $numSol = 0;
+        }
+        return $numSol;
+    }
+
     public function getNumSolicitacoesByMat() {
         global $pdo;
-        $sql = $pdo->prepare("SELECT * FROM servico WHERE id_usu_ped=:id");
-        $sql->bindvalue(":id",$_SESSION['cLoginMatricula']);
+        $sql = $pdo->prepare("SELECT * FROM servico WHERE id_usu_ped=:id OR id_usu_sub=:id");
+        $sql->bindvalue(":id", $_SESSION['cLoginMatricula']);
         $sql->execute();
         $numSol = $sql->rowCount();
         if ($numSol == NULL) {
