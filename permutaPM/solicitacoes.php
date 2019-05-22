@@ -159,6 +159,9 @@ $usu = $u->getUsuariobyID($_SESSION['cLogin']);
                     <?php elseif ($usu['tipo_usuario'] == 2): ?>
                         <a href="aceitar-permuta.php?id=<?php echo $solicitacao['id']; ?>" class="btn btn-success">Aceitar</a>
                         <a href="recusar-permuta.php?id=<?php echo $solicitacao['id']; ?>" class="btn btn-danger">Recusar</a>
+                    <?php elseif ($usu['tipo_usuario'] == 0): ?>
+                        <a href="aceitar-permuta.php?id=<?php echo $solicitacao['id']; ?>" class="btn btn-success">Aceitar</a>
+                        <a href="recusar-permuta.php?id=<?php echo $solicitacao['id']; ?>" class="btn btn-danger">Recusar</a>
                     <?php endif; ?>
                 </td>
             </tr>

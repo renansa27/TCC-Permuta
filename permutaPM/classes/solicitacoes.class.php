@@ -7,7 +7,7 @@ class Solicitacoes {
         global $pdo;
 
         $array = array();
-        $sql = $pdo->prepare("SELECT * FROM servico WHERE id_usu_ped =:id_usuario OR id_usu_sub =:id_usuario");
+        $sql = $pdo->prepare("SELECT * FROM servico WHERE id_usu_ped =:id_usuario OR id_usu_sub =:id_usuario AND status!=0");
         $sql->bindValue(':id_usuario', $_SESSION['cLoginMatricula']);
         $sql->execute();
 
