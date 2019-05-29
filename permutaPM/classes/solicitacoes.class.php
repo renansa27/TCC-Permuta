@@ -59,18 +59,22 @@ class Solicitacoes {
         return $array;
     }
 
-    public function addSolicitacao($mat_usu_ped, $mat_usu_sub, $tipo_servico, $data, $turno) {
+    public function addSolicitacao($mat_usu_substituido, $mat_usu_substituto, $tipo_servico, $data, $turno) {
 
         global $pdo;
 
         $sql = $pdo->prepare("INSERT INTO servico SET id_usu_ped=:mat_usu_ped, id_usu_sub=:mat_usu_sub, tipo_servico=:tipo_servico, data=:data, turno=:turno, status=:status");
 
-        $sql->bindValue(":mat_usu_ped", $mat_usu_ped);
-        $sql->bindValue(":mat_usu_sub", $mat_usu_sub);
+        $sql->bindValue(":mat_usu_ped", $mat_usu_substituido);
+        $sql->bindValue(":mat_usu_sub", $mat_usu_substituto);
         $sql->bindValue(":tipo_servico", $tipo_servico);
         $sql->bindValue(":data", $data);
         $sql->bindValue(":turno", $turno);
-        $sql->bindValue(":status", 0);
+        if($mat_usu_substituto == $_SESSION["cLoginMatricula"]){
+            $sql->bindValue(":status", 7);
+        }else{
+            $sql->bindValue(":status", 0);
+        }
 
         $sql->execute();
 

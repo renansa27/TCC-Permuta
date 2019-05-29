@@ -70,7 +70,7 @@
                         <?php endif; ?>
                     <?php else: ?>
                         <li>
-                            <a href='./cadastro'>Cadastre-se</a>
+                            <a href='./cadastro.php'>Cadastre-se</a>
                         </li>
                         <li>
                             <a href="./login.php">Login</a>

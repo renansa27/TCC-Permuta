@@ -3,14 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/permutaPM/solicitacoes.php</file>
+            <file>file:/C:/wamp64/www/permutaPM/classes/usuarios.class.php</file>
+            <file>file:/C:/wamp64/www/permutaPM/sair.php</file>
+            <file>file:/C:/wamp64/www/permutaPM/comandante.php</file>
             <file>file:/C:/wamp64/www/permutaPM/recusar-permuta.php</file>
             <file>file:/C:/wamp64/www/permutaPM/login.php</file>
             <file>file:/C:/wamp64/www/permutaPM/index.php</file>
-            <file>file:/C:/wamp64/www/permutaPM/classes/solicitacoes.class.php</file>
             <file>file:/C:/wamp64/www/permutaPM/solicitacaoPermuta.php</file>
-            <file>file:/C:/wamp64/www/permutaPM/aceitar-permuta.php</file>
             <file>file:/C:/wamp64/www/permutaPM/envia-maj.php</file>
+            <file>file:/C:/wamp64/www/permutaPM/aceitar-permuta.php</file>
+            <file>file:/C:/wamp64/www/permutaPM/cadastro.php</file>
+            <file>file:/C:/wamp64/www/permutaPM/solicitacoes.php</file>
+            <file>file:/C:/wamp64/www/permutaPM/config.php</file>
+            <file>file:/C:/wamp64/www/permutaPM/sargentoPage.php</file>
+            <file>file:/C:/wamp64/www/permutaPM/pages/footer.php</file>
+            <file>file:/C:/wamp64/www/permutaPM/ajax.php</file>
+            <file>file:/C:/wamp64/www/permutaPM/classes/solicitacoes.class.php</file>
         </group>
     </open-files>
 </project-private>
