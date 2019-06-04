@@ -7,7 +7,7 @@ class Solicitacoes {
         global $pdo;
 
         $array = array();
-        $sql = $pdo->prepare("SELECT * FROM servico WHERE id_usu_ped =:id_usuario OR id_usu_sub =:id_usuario AND status!=0");
+        $sql = $pdo->prepare("SELECT * FROM servico WHERE (id_usu_ped =:id_usuario AND status!= 7) OR (id_usu_sub =:id_usuario AND status !=0)");
         $sql->bindValue(':id_usuario', $_SESSION['cLoginMatricula']);
         $sql->execute();
 
@@ -21,7 +21,7 @@ class Solicitacoes {
         global $pdo;
 
         $array = array();
-        $sql = $pdo->prepare("SELECT * FROM servico WHERE id_usu_sub =:id_usuario AND status = 0");
+        $sql = $pdo->prepare("SELECT * FROM servico WHERE (id_usu_sub =:id_usuario AND status = 0)OR(id_usu_ped =:id_usuario AND status = 7)");
         $sql->bindValue(':id_usuario', $_SESSION['cLoginMatricula']);
         $sql->execute();
 
@@ -70,9 +70,9 @@ class Solicitacoes {
         $sql->bindValue(":tipo_servico", $tipo_servico);
         $sql->bindValue(":data", $data);
         $sql->bindValue(":turno", $turno);
-        if($mat_usu_substituto == $_SESSION["cLoginMatricula"]){
+        if ($mat_usu_substituto == $_SESSION["cLoginMatricula"]) {
             $sql->bindValue(":status", 7);
-        }else{
+        } else {
             $sql->bindValue(":status", 0);
         }
 

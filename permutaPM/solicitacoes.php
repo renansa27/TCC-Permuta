@@ -16,8 +16,6 @@ $usu = $u->getUsuariobyID($_SESSION['cLogin']);
     <?php if ($usu['tipo_usuario'] == 0): ?>
         <h1>Minhas Permutas</h1>
 
-        <!--a href="solicitacaoPermuta.php" class="btn btn-default">Adicionar solicitação</a-->
-
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -27,12 +25,9 @@ $usu = $u->getUsuariobyID($_SESSION['cLogin']);
                     <th>Data</th>
                     <th>Turno</th>
                     <th>Status</th>
-                    <!--th>Ações</th-->
                 </tr>
             </thead>
             <?php
-            //require './classes/solicitacoes.class.php';
-            //$s = new Solicitacoes();
             $solicitacoes = $s->getSolicitacoes();
 
             foreach ($solicitacoes as $solicitacao):
@@ -47,7 +42,6 @@ $usu = $u->getUsuariobyID($_SESSION['cLogin']);
                     </td>
                     <td>
                         <?php
-                        //$usu = new Usuarios();
                         $nome_requerido = $u->getUsuarioByMat($solicitacao['id_usu_sub']);
                         echo $nome_requerido['graduacao'] . " " . $nome_requerido['nome'];
                         ?>
@@ -61,26 +55,24 @@ $usu = $u->getUsuariobyID($_SESSION['cLogin']);
                     <td><?php echo $solicitacao['turno']; ?>
                     <td><?php
                         if ($solicitacao['status'] == 0) {
-                            echo "Substituto avaliando";
+                            ?><strong style="color: yellow"> <?php echo "Substituto avaliando"; ?></strong><?php
                         } elseif ($solicitacao['status'] == 1) {
-                            echo "Sargento avaliando";
+                            ?><strong style="color: yellowgreen"> <?php echo "Sargento avaliando"; ?></strong><?php
                         } elseif ($solicitacao['status'] == 2) {
-                            echo "Comandante avaliando";
+                            ?><strong style="color: orange"><?php echo "Comandante avaliando"; ?></strong><?php
                         } elseif ($solicitacao['status'] == 3) {
-                            echo "Substituto recusou";
+                            ?><strong style="color: red"><?php echo "Substituto recusou"; ?></strong><?php
                         } elseif ($solicitacao['status'] == 4) {
-                            echo "Sargento recusou";
-                        } elseif ($solicitacao['status'] == 5) {
-                            echo "Comandante recusou";
-                        } elseif ($solicitacao['status'] == 6) {
-                            echo "Permuta aceita";
-                        }
-                        ?>
+                            ?><strong style="color: red"><?php echo "Sargento recusou"; ?></strong><?php
+                            } elseif ($solicitacao['status'] == 5) {
+                                ?><strong style="color: red"><?php echo "Comandante recusou"; ?></strong><?php
+                            } elseif ($solicitacao['status'] == 6) {
+                                ?><strong style="color: green"><?php echo "Permuta aceita"; ?></strong><?php
+                            } elseif ($solicitacao['status'] == 7) {
+                                echo "Substituído avaliando";
+                            }
+                            ?>
                     </td>
-                    <!--td>
-                        <a href="editar-anuncio.php?id=<!--?php echo $solicitacao['id']; ?>" class="btn btn-success">Editar</a>
-                        <a href="excluir-anuncio.php?id=</*?php echo $solicitacao['id']; ?>*/" class="btn btn-danger">Excluir permuta</a>
-                    </td-->
                 </tr>
             <?php endforeach;
             ?>
@@ -100,8 +92,6 @@ $usu = $u->getUsuariobyID($_SESSION['cLogin']);
             </tr>
         </thead>
         <?php
-        //require './classes/solicitacoes.class.php';
-        //$s = new Solicitacoes();
         if ($usu['tipo_usuario'] == 0) {
             $solicitacoes = $s->getSolicitacoesAnalise();
         } elseif ($usu['tipo_usuario'] == 1) {
@@ -135,21 +125,23 @@ $usu = $u->getUsuariobyID($_SESSION['cLogin']);
                 <td><?php echo $solicitacao['turno']; ?>
                 <td><?php
                     if ($solicitacao['status'] == 0) {
-                        echo "Substituto avaliando";
+                        ?><strong style="color: yellow"> <?php echo "Substituto avaliando"; ?></strong><?php
                     } elseif ($solicitacao['status'] == 1) {
-                        echo "Sargento avaliando";
+                        ?><strong style="color: yellowgreen"><?php echo "Sargento avaliando"; ?></strong><?php
                     } elseif ($solicitacao['status'] == 2) {
-                        echo "Comandante avaliando";
+                        ?><strong style="color: orange"><?php echo "Comandante avaliando"; ?></strong><?php
                     } elseif ($solicitacao['status'] == 3) {
-                        echo "Substituto recusou";
-                    } elseif ($solicitacao['status'] == 4) {
-                        echo "Sargento recusou";
-                    } elseif ($solicitacao['status'] == 5) {
-                        echo "Comandante recusou";
-                    } elseif ($solicitacao['status'] == 6) {
-                        echo "Permuta aceita";
-                    }
-                    ?>
+                        ?><strong style="color: red"><?php echo "Substituto recusou"; ?></strong><?php
+                        } elseif ($solicitacao['status'] == 4) {
+                            ?><strong style="color: red"><?php echo "Sargento recusou"; ?></strong><?php
+                        } elseif ($solicitacao['status'] == 5) {
+                            ?><strong style="color: red"><?php echo "Comandante recusou"; ?></strong><?php
+                        } elseif ($solicitacao['status'] == 6) {
+                            ?><strong style="color: green"><?php echo "Permuta aceita"; ?></strong><?php
+                        } elseif ($solicitacao['status'] == 7) {
+                            echo "Substituído avaliando";
+                        }
+                        ?>
                 </td>
                 <td>
                     <?php if ($usu['tipo_usuario'] == 1): ?>
