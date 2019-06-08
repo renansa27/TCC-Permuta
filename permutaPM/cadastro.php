@@ -14,7 +14,7 @@
         $senha = $_POST['senha'];
         $contato = addslashes($_POST['contato']);
 
-        if (!empty($nome) && !empty($graduacao) && !empty($numero)&& !empty($matricula)&& !empty($senha)&& !empty($contato)) {
+        if (!empty($nome) && !empty($graduacao) && !empty($numero) && !empty($matricula) && !empty($senha) && !empty($contato)) {
             if ($u->cadastrar($nome, $graduacao, $numero, $matricula, $senha, $contato)) {
                 ?>
                 <div class="alert alert-success">
@@ -52,9 +52,22 @@
                 <label for="nome">NOME</label>
                 <input type='text' name="nome" id="nome" class="form-control"  />
             </div>
-            <div style="margin: 15px 0px" class="col-xs-3">
-                <label for="graduacao">GRADUAÇÃO</label>
-                <input type='text' name="graduacao" id="graduacao" class="form-control" />
+            <div style="margin: 40px 0px" class="col-xs-3">
+                <select class="form-control">
+                    <option value="Coronel">Coronel</option>
+                    <option value="Tenente-Coronel">Tenente-Coronel</option>
+                    <option value="Major">Major</option>
+                    <option value="Capitão">Capitão</option>
+                    <option value="Primeiro-Tenente">Primeiro-Tenente</option>
+                    <option value="Segundo-Tenente">Segundo-Tenente</option>
+                    <option value="Aspirante">Aspirante</option>
+                    <option value="Subtenente">Subtenente</option>
+                    <option value="Primeiro-Sargento">Primeiro-Sargento</option>
+                    <option value="Segundo-Sargento">Segundo-Sargento</option>
+                    <option value="Terceiro-Sargento">Terceiro-Sargento</option>
+                    <option value="Cabo">Cabo</option>
+                    <option value="Soldado">Soldado</option>
+                </select>
             </div>
             <div style="margin: 15px 0px" class="col-xs-3">
                 <label for="numero">NÚMERO</label>
@@ -79,4 +92,5 @@
     </form>
 </div>
 
-<?php require './pages/footer.php';
+<?php
+require './pages/footer.php';

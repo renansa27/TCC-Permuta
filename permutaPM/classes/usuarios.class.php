@@ -4,6 +4,7 @@ class Usuarios {
 
     public function cadastrar($nome, $graduacao, $numero, $matricula, $senha, $contato) {
         global $pdo;
+        $matricula = str_pad($matricula, 10, '0', STR_PAD_LEFT);
         $sql = $pdo->prepare("SELECT id FROM usuarios WHERE matricula = :matricula");
         $sql->bindValue(":matricula", $matricula);
         $sql->execute();
@@ -30,6 +31,7 @@ class Usuarios {
     public function login($matricula, $senha) {
 
         global $pdo;
+        $matricula = str_pad($matricula, 10, '0', STR_PAD_LEFT);
         $sql = $pdo->prepare("SELECT id FROM usuarios WHERE matricula = :matricula AND senha = :senha");
         $sql->bindValue(":matricula", $matricula);
         $sql->bindValue(":senha", md5($senha));
@@ -45,13 +47,13 @@ class Usuarios {
         }
     }
 
-    public function getUsuarioByMat($id) {
+    public function getUsuarioByMat($matricula) {
         global $pdo;
-        $id = str_pad($id, 8, '0', STR_PAD_LEFT);
+        $matricula = str_pad($matricula, 10, '0', STR_PAD_LEFT);
         $array = array();
 
-        $sql = $pdo->prepare("SELECT * FROM usuarios WHERE matricula=:id");
-        $sql->bindValue(":id", $id);
+        $sql = $pdo->prepare("SELECT * FROM usuarios WHERE matricula=:matricula");
+        $sql->bindValue(":matricula", $matricula);
         $sql->execute();
 
         if ($sql->rowCount() > 0) {

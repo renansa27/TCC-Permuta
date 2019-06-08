@@ -1,5 +1,6 @@
 <?php
-
+$cache_limiter=5;
+session_cache_limiter($cache_limiter);
 session_start();
 
 global $pdo;
