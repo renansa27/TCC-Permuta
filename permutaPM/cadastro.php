@@ -52,7 +52,8 @@
                 <label for="nome">NOME</label>
                 <input type='text' name="nome" id="nome" class="form-control"  />
             </div>
-            <div style="margin: 40px 0px" class="col-xs-3">
+            <div style="margin: 15px 0px" class="col-xs-3">
+                <label for="graduacao">GRADUAÇÃO</label>
                 <select class="form-control">
                     <option value="Coronel">Coronel</option>
                     <option value="Tenente-Coronel">Tenente-Coronel</option>
